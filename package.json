@@ -1,0 +1,27 @@
+{
+  "name": "librarymanager",
+  "version": "1.0.0",
+  "description": "This responsive app allows the you to list, search, add, update, and delete books in an existing SQLite database.  I used JavaScript, Node.js, Express, Pug, CSS, and the SQL ORM Sequelize to create this database manager.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/toniagonzalez/LibraryManager.git"
+  },
+  "author": "Tonia Gonzalez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/toniagonzalez/LibraryManager/issues"
+  },
+  "homepage": "https://github.com/toniagonzalez/LibraryManager#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pug": "^2.0.3",
+    "sequelize": "^5.8.9",
+    "sequelize-cli": "^5.5.0",
+    "sqlite3": "^4.0.8"
+  }
+}
