@@ -2,6 +2,7 @@ extends layout.pug
 
 block content
   h2 Edit / Update Book
+  h2 The Title has been Updated!
   form(action="/books/" + book.id  method="post")
     p
       label(for='title') Title
@@ -38,6 +39,6 @@ block content
         )
   form
     p
-      a(class='button' href='/books') Cancel
+      a(class='button' href='/books') Return to Home
     p
-      a(class='button' href='/books/delete/' + book.id) Delete
+      a(class='button' href='/books/delete/' + book.id) Delete Book

@@ -1,5 +1,7 @@
 extends layout.pug
 
 block content
-  h2.error= `${error.message} - Status: ${error.status}`
-  p= `${error.stack}`
+  h2 Sorry! There was an unexpected error on the server.
+
+  p
+    a(class='button' href='/') Return to homepage

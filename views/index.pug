@@ -3,7 +3,7 @@ extends layout.pug
 block content
   h2 Books
   p
-    a(class='button' href='google.com') Create New Book
+    a(class='button' href='/books/new') Create New Book
   table(style='width:100%', border='1')
     tr
       th Title
@@ -11,10 +11,11 @@ block content
       th Genre
       th Year
 
-    tb each book in books
-      tr
-        td
-          a(href='google.com') book.title
-        td book.author
-        td book.genre
-        td book.year
+    tb
+      each book in books
+          tr
+            td
+              a(href='/books/' + book.id)= book.title
+            td= book.author
+            td= book.genre
+            td= book.year
