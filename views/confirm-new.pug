@@ -2,7 +2,7 @@ extends layout.pug
 
 block content
   h2 Edit / Update Book
-  h2 The Title has been Added!
+  h2.confirm The Title has been Added!
   form(action="/books/" + book.id  method="post")
     p
       label(for='title') Title

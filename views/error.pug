@@ -1,3 +1,6 @@
-extends layout.pug
-
-block content
+if(errors)
+  h2.error Ooops an error occured!
+  ul.errors
+    each error in errors
+      li
+        =error.message

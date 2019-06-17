@@ -2,6 +2,6 @@ extends layout.pug
 
 block content
   h2 Sorry! There was an unexpected error on the server.
-
+  h2.error= `${error.message} - Status: ${error.status}`
   p
     a(class='button' href='/') Return to homepage

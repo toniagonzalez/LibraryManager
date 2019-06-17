@@ -30,8 +30,3 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
-
-//
-// app.listen(3000, ()=>{
-//   console.log('Go to "localhost:3000" in your browser to view the app!');
-// });

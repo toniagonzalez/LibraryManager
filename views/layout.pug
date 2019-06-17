@@ -8,14 +8,18 @@ html(lang="en" dir="ltr")
   body
     header
       h1 Library Manager Tool
-      label(
-        for='site-search'
-      ) Search Books
-      input(
-        type='search'
-        name='q'
-        id='site-search'
-      )
+      form(action='/books/search')
+        label(
+          for='site-search'
+        ) Search Books
+        input(
+          type='search'
+          name='q'
+          id='site-search'
+          placeholder='Search By Author, Title, or Genre'
+          aria-label='Search By Author, Title, or Genre'
+        )
+        button(type='submit') Search
     block content
 
     script(src='/static/js/scripts.js')

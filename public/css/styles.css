@@ -4,6 +4,7 @@ body {
   font: 18px "Garamond", sans-serif;
   color: #1F1305; /*chocolate brown*/
   background-color: #f0f3f4; /*light steel blue*/
+  width: 95%;
 }
 
 header {
@@ -25,14 +26,24 @@ a {
     color: black;
   }
 
-a.button, input[type=submit] {
+a.button,
+input[type=submit],
+button {
   color: white;
-  background: #CAB968;
+  background: #CAB968; /*golden*/
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   padding: 10px 14px 12px;
   font-size: 14px;
   border-radius: 2px;
   cursor: pointer;
+}
+
+button {
+  background: #1F1305; /*chocolate brown*/
+}
+
+button:hover {
+  background: #CAB968; /*golden*/
 }
 
 form a.button, input[type=submit] {
@@ -100,16 +111,22 @@ input {
   padding: 10px;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 14px;
+  text-transform: capitalize;
   border-radius: 2px;
   border-color: #E7E7E7;
   transition: 0.4s;
 }
 
-input[type=text] {
+input[type=text],
+input[type=search]{
   margin-left: 7px;
   width: 300px;
 }
 
 .error {
   color: rgb(236, 15, 15);
+}
+
+.confirm {
+  color: green;
 }
