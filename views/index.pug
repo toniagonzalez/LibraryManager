@@ -4,6 +4,14 @@ block content
   h2 Books
   p
     a(class='button' href='/books/new') Create New Book
+  div.paginationDiv
+    p Results Pages:
+    - var i = 1;
+    ul.paginationUL
+      while i < (pages + 1)
+        li
+          a(href='/books?page=' + i)= i++
+
   table(style='width:100%', border='1')
     tr
       th Title

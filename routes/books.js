@@ -4,12 +4,26 @@ const Book = require('../models').Book;
 const Sequelize = require('../models').Sequelize;
 const Op = Sequelize.Op;
 
-//GET All Books
-//SELECT * FROM books;
+
+//GET All Books by page
+//SELECT * FROM books ORDER BY title ASC LIMIT 10 OFFSET (req.params.page -1)*10;
 router.get('/', (req, res, next)=>{
-  Book.findAll({order:[ ['title', 'ASC']] }).then( books => {
-    res.render('index', {books});
-  }).catch((err)=>{
+  if (!req.query.page){
+    res.redirect('/books?page=1');
+  }
+  let offset = (req.query.page -1) * 10;
+  let limit = 10;
+  let pages;
+  Book.findAndCountAll({
+      limit: limit,
+      offset: offset,
+      order:[ ['title', 'ASC']]
+  })
+  .then( ({count, rows}) => {
+    let pages = Math.ceil(count/limit);
+      res.render('index', {books:rows, pages});
+  })
+  .catch((err)=>{
     next(err);
   })
 })
@@ -120,7 +134,7 @@ router.post('/new', (req, res, next)=>{
     if(err.name=== "SequelizeValidationError"){
       const book = Book.build(req.body);
       book.id = req.params.id;
-      
+
       res.render('new-book', {
         book: book,
         errors: err.errors
