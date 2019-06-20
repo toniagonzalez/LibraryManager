@@ -8,7 +8,7 @@ html(lang="en" dir="ltr")
   body
     header
       h1 Library Manager Tool
-      form(action='/books/search')
+      form(action='/books/search?q')
         label(
           for='site-search'
         ) Search Books
@@ -16,10 +16,9 @@ html(lang="en" dir="ltr")
           type='search'
           name='q'
           id='site-search'
-          placeholder='Search By Author, Title, or Genre'
-          aria-label='Search By Author, Title, or Genre'
+          placeholder='Search By Author, Title, Genre, or Year'
+          aria-labelledby='Search By Author, Title, or Genre'
         )
-        button(type='submit') Search
+        button(aria-label='search' type='submit') Search
+        a(aria-label='reset form' class='reset' href='/books') Reset
     block content
-
-    script(src='/static/js/scripts.js')

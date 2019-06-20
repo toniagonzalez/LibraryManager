@@ -6,39 +6,12 @@ block content
   include error
 
   form(action="/books/new", method="post")
-    p
-      label(for='title') Title
-      input(
-        type='text'
-        name='title'
-        value=''
-        )
-    p
-      label(for='author') Author
-      input(
-        type='text'
-        name='author'
-        value= ''
-        placeholder='ex: First Name Last Name'
-        )
-    p
-      label(for='genre') Genre
-      input(
-        type='text'
-        name='genre'
-        value= ''
-        )
-    p
-      label(for='year') Year
-      input(
-        type='text'
-        name='year'
-        value= ''
-        )
+    include form
     p
       input(
         type='submit'
         value='Create New Book'
+        aria-label='create new book'
         )
     p
-      a(class='button' href='/books') Cancel
+      a(aria-label='cancel' class='button' href='/books') Cancel

@@ -1,0 +1,24 @@
+extends layout.pug
+
+block content
+  h2 Books
+  p
+    a(class='button' href='/books/new') Create New Book
+  p Showing Results for "#{search}"
+  table(style='width:100%', border='1')
+    tr
+      th Title
+      th Author
+      th Genre
+      th Year
+
+    tb
+      each book in books
+          tr
+            td
+              a(href='/books/' + book.id)= book.title
+            td= book.author
+            td= book.genre
+            td= book.year
+
+  include no-results-message

@@ -27,6 +27,7 @@ a {
   }
 
 a.button,
+a.reset,
 input[type=submit],
 button {
   color: white;
@@ -42,7 +43,15 @@ button {
   background: #1F1305; /*chocolate brown*/
 }
 
-button:hover {
+a.reset {
+  color: #1F1305; /*chocolate brown*/
+  text-shadow: none;
+  background: #009999; /*blue-green*/
+  border: 1px solid #006666; /*drk blue-green*/
+}
+
+button:hover,
+a.reset:hover {
   background: #CAB968; /*golden*/
 }
 
@@ -55,9 +64,10 @@ input[type=submit] {
   border: 0;
 }
 
-  a.button:hover, input[type=submit]:hover {
-    background-color: #1F1305; /*chocolate brown*/
-  }
+a.button:hover,
+input[type=submit]:hover {
+  background-color: #1F1305; /*chocolate brown*/
+}
 
 p {
   margin: 20px auto;
@@ -112,7 +122,6 @@ input {
   padding: 10px;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
   font-size: 14px;
-  text-transform: capitalize;
   border-radius: 2px;
   border-color: #E7E7E7; /*light gray*/
   transition: 0.4s;

@@ -3,15 +3,15 @@ extends layout.pug
 block content
   h2 Books
   p
-    a(class='button' href='/books/new') Create New Book
+    a(aria-label='create new book' class='button' href='/books/new') Create New Book
   div.paginationDiv
     p Results Pages:
     - var i = 1;
     ul.paginationUL
       while i < (pages + 1)
-        li
-          a(href='/books?page=' + i)= i++
-
+        - var activeClass = parseInt(page) === i ? 'active' : ''
+        li(class=activeClass)
+          a(aria-label='go to page ' + i href='/books?page=' + i)= i++
   table(style='width:100%', border='1')
     tr
       th Title
@@ -23,7 +23,7 @@ block content
       each book in books
           tr
             td
-              a(href='/books/' + book.id)= book.title
+              a(aria-label='update ' + book.title href='/books/' + book.id)= book.title
             td= book.author
             td= book.genre
             td= book.year

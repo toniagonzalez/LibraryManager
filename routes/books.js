@@ -13,15 +13,16 @@ router.get('/', (req, res, next)=>{
   }
   let offset = (req.query.page -1) * 10;
   let limit = 10;
+  let page = req.query.page;
   let pages;
   Book.findAndCountAll({
-      limit: limit,
-      offset: offset,
-      order:[ ['title', 'ASC']]
-  })
+        limit: limit,
+        offset: offset,
+        order:[ ['title', 'ASC']]
+    })
   .then( ({count, rows}) => {
     let pages = Math.ceil(count/limit);
-      res.render('index', {books:rows, pages});
+      res.render('index', {books:rows, pages, page});
   })
   .catch((err)=>{
     next(err);
@@ -29,31 +30,38 @@ router.get('/', (req, res, next)=>{
 })
 
 //GET Search Results
-//SELECT * FROM books WHERE author OR title OR genre LIKE %req.body%;
-router.get('/search/?q', (req, res, next)=>{
+//SELECT * FROM books WHERE author OR title OR genre OR year LIKE %req.query.q%;
+router.get('/search', (req, res, next)=>{
+  let search = req.query.q;
   Book.findAll({
-          where: {
-            [Op.or]: [
-              {
-                title: {
-                  [Op.like]: req.body
-                },
-                author: {
-                  [Op.like]: req.body
-                },
-                genre: {
-                  [Op.like]: req.body
-                }
-              }
-           ]
-         },
-         order:[ ['title', 'ASC']]
-        }).then( books => {
-          if (books){
-            res.render('index', {books});
-          } else {
-            next();
+      order:[ ['title', 'ASC']],
+      where: {
+        [Op.or]: [
+          {
+            'title': {
+              [Op.substring]: req.query.q
+            }
+          },
+          {
+            'author': {
+              [Op.substring]: req.query.q
+            }
+          },
+          {
+            'genre': {
+              [Op.substring]: req.query.q
+            }
+          },
+          {
+            'year': {
+              [Op.substring]: parseInt(req.query.q)
+            }
           }
+        ]
+      }
+  })
+  .then( (books) => {
+    res.render('search', {books, search});
   }).catch((err)=>{
     next(err);
   })
@@ -61,7 +69,13 @@ router.get('/search/?q', (req, res, next)=>{
 
 //GET New Book Form
 router.get('/new', (req, res)=>{
-  res.render('new-book');
+  let book= {
+    'title': '',
+    'author': '',
+    'genre':'',
+    'year': ''
+  };
+  res.render('new-book', {book});
 })
 
 //GET Edit/Update Form
@@ -108,7 +122,7 @@ router.get('/confirm-update/:id', (req, res, next)=>{
 })
 
 //Get Delete form
-router.get('/delete/:id', (req, res)=>{
+router.get('/:id/delete', (req, res)=>{
   Book.findByPk(req.params.id).then( (book)=> {
     if (book){
       res.render('delete', {book});
@@ -179,7 +193,7 @@ router.post('/:id', (req, res, next)=>{
 
 //DELETE Book
 //DELETE FROM Books WHERE id= (req.params.id)
-router.post('/delete/:id', (req, res, next)=>{
+router.post('/:id/delete', (req, res, next)=>{
   Book.findByPk(req.params.id).then((book)=> {
       return book.destroy();
   }).then(()=> {
