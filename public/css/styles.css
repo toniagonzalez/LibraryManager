@@ -4,10 +4,12 @@ body {
   font: 18px "Garamond", sans-serif;
   color: #1F1305; /*chocolate brown*/
   background-color: #f0f3f4; /*light steel blue*/
-  width: 95%;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 header {
+  width: 100%;
   padding: 10px 50px 50px;
   border: 1px solid darkgrey;
   text-shadow: white 1px 0 1px;

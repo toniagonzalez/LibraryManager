@@ -6,7 +6,7 @@ block content
   form(action="/books/" + book.id + "/delete" method="post")
     include form
     p
-      a(aria-label='no! take me back' class='button' href='/books') No! Take Me Back.
+      a(aria-label='no! take me back' class='button' href='/books/?page=1') No! Take Me Back.
     p
       input(
         type='submit'
