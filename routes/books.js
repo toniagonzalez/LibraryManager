@@ -5,15 +5,17 @@ const Sequelize = require('../models').Sequelize;
 const Op = Sequelize.Op;
 
 
+
 //GET All Books by page
 //SELECT * FROM books ORDER BY title ASC LIMIT 10 OFFSET (req.params.page -1)*10;
 router.get('/', (req, res, next)=>{
   if (!req.query.page){
     res.redirect('/books?page=1');
   }
-  let offset = (req.query.page -1) * 10;
+  let page = parseInt(req.query.page);
+  let offset = (page -1) * 10;
+
   let limit = 10;
-  let page = req.query.page;
   let pages;
   Book.findAndCountAll({
         limit: limit,
@@ -52,11 +54,11 @@ router.get('/search', (req, res, next)=>{
               [Op.substring]: req.query.q
             }
           },
-          {
-            'year': {
-              [Op.substring]: parseInt(req.query.q)
-            }
-          }
+          // {
+          //  'year': {
+          //     [Op.substring]: parseInt(req.query.q)
+          //   }
+          // }
         ]
       }
   })

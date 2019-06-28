@@ -1,14 +1,23 @@
 {
   "development": {
-    "storage": "library.db",
-    "dialect": "sqlite"
+    "username": "toniagonzalez",
+    "password": null,
+    "database": "librarymanager",
+    "host": "localhost",
+    "dialect": "postgres"
   },
   "test": {
-    "storage": "library.db",
-    "dialect": "mysql"
+    "username": "librarian",
+    "password": null,
+    "database": "librarymanager",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
   },
   "production": {
-    "storage": "library.db",
-    "dialect": "mysql"
+    "username": "librarian",
+    "password": null,
+    "database": "librarymanager",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
   }
 }
