@@ -3,6 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Book = sequelize.define('Book', {
     title: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "Title is required"
@@ -11,14 +12,21 @@ module.exports = (sequelize, DataTypes) => {
     },
     author: {
       type: DataTypes.STRING,
+      allowNull: false,
       validate: {
         notEmpty: {
           msg: "Author is required"
         }
       }
     },
-    genre: DataTypes.STRING,
-    year: DataTypes.INTEGER
+    genre: {
+      type: DataTypes.STRING,
+      allowNull: true
+    }, 
+    year: {
+      type: DataTypes.INTEGER,
+      allowNull: true
+    } 
   }, {});
   Book.associate = function(models) {
     // associations can be defined here

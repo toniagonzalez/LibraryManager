@@ -5,7 +5,6 @@ const Sequelize = require('../models').Sequelize;
 const Op = Sequelize.Op;
 
 
-
 //GET All Books by page
 //SELECT * FROM books ORDER BY title ASC LIMIT 10 OFFSET (req.params.page -1)*10;
 router.get('/', (req, res, next)=>{
@@ -35,30 +34,31 @@ router.get('/', (req, res, next)=>{
 //SELECT * FROM books WHERE author OR title OR genre OR year LIKE %req.query.q%;
 router.get('/search', (req, res, next)=>{
   let search = req.query.q;
-  Book.findAll({
+    Book.findAll({
       order:[ ['title', 'ASC']],
       where: {
         [Op.or]: [
           {
             'title': {
-              [Op.substring]: req.query.q
+              [Op.iRegexp]: search
             }
           },
           {
             'author': {
-              [Op.substring]: req.query.q
+              [Op.iRegexp]: search
             }
           },
           {
             'genre': {
-              [Op.substring]: req.query.q
+              [Op.iRegexp]: search
             }
           },
-          // {
-          //  'year': {
-          //     [Op.substring]: parseInt(req.query.q)
-          //   }
-          // }
+          Sequelize.where(
+            Sequelize.cast(Sequelize.col('year'), 'varchar'),
+            {
+              [Op.iRegexp]: search
+            }
+          )
         ]
       }
   })
@@ -139,8 +139,8 @@ router.get('/:id/delete', (req, res)=>{
 
 //POST New Book
 //INSERT INTO books (title, author, genre, year) VALUES(...)
-router.post('/new', (req, res, next)=>{
-  Book.create(req.body).then( (book) => {
+router.post('/new', async (req, res, next)=>{
+  await Book.create(req.body).then( (book) => {
     if(book){
       res.redirect('/books/confirm-new/' + book.id);
     } else {
