@@ -21,7 +21,7 @@ const db = {};
 //   dialect: 'postgres'
 // });
 
-const sequelize = new Sequelize('postgres://toniagonzalez@localhost/librarymanager');
+const sequelize = new Sequelize(process.env.DATABASE_URL || 'postgres://toniagonzalez@localhost/librarymanager');
 
 //Test Connection
 sequelize.authenticate()

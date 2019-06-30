@@ -7,17 +7,18 @@
     "dialect": "postgres"
   },
   "test": {
-    "username": "librarian",
+    "username": "toniagonzalez",
     "password": null,
     "database": "librarymanager",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
-    "username": "librarian",
-    "password": null,
-    "database": "librarymanager",
-    "host": "127.0.0.1",
-    "dialect": "postgres"
+    "client": "postgresql",
+    "connection": {
+      "database": "librarymanager",
+      "username": "toniagonzalez",
+      "password": "password"
+    }
   }
 }
